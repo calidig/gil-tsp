@@ -1,0 +1,26 @@
+<div class="px-15">
+  <app-demo-stats title="CSV" [result]="theirResult"></app-demo-stats>
+  <app-demo-stats title="CORRO" [result]="ourResult"></app-demo-stats>
+
+
+  <p *ngIf="stats.distance > 0; else templateRefTime">
+    total time <span>increased</span> with <span>{{-1 * stats.time}}%</span>
+  </p>
+
+  <ng-template #templateRefTime>
+    <p>
+      total time <span>decreased</span> with <span>{{-1 * stats.time}}%</span>
+    </p>
+  </ng-template>
+
+  <p *ngIf="stats.distance > 0; else templateRefDistance">
+    total time <span>increased</span> with <span>{{-1 * stats.distance}}%</span>
+  </p>
+
+  <ng-template #templateRefDistance>
+    <p>
+      total time <span>decreased</span> with <span>{{-1 * stats.distance}}%</span>
+    </p>
+  </ng-template>
+
+</div>

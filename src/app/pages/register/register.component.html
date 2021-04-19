@@ -1,0 +1,44 @@
+<div style="display: flex; justify-content: center">
+  <form (submit)="register()" [formGroup]="registerForm" class="default-form-width">
+    <h2 style="text-transform: capitalize">{{language.translationsDictionary.register}}</h2>
+    <app-form-field>
+      <label>
+        <app-form-label>{{language.translationsDictionary.email}}</app-form-label>
+        <input autocomplete="email" formControlName="email" name="email" required type="email">
+      </label>
+    </app-form-field>
+
+    <app-form-field>
+      <label>
+        <app-form-label>{{language.translationsDictionary.password}}</app-form-label>
+        <input autocomplete="new-password" formControlName="password" name="password" required type="password">
+      </label>
+    </app-form-field>
+
+
+    <app-form-field>
+      <label>
+        <app-form-label>{{language.translationsDictionary.confirmPassword}}</app-form-label>
+        <input autocomplete="new-password" formControlName="confirmPassword" name="confirmPassword" required
+               type="password"></label>
+    </app-form-field>
+
+
+    <app-form-field>
+      <label>
+        <app-form-label>{{language.translationsDictionary.company}}</app-form-label>
+        <input formControlName="organization" name="organization" required></label>
+    </app-form-field>
+
+
+    <app-action-button [disabled]="registerForm.invalid"
+                       color="primary" class="flex-button-end">
+      {{language.translationsDictionary.register}}
+    </app-action-button>
+
+    <p>{{language.translationsDictionary.alreadyHaveAnAccount}}
+      <a routerLink="/auth/login">login</a>
+    </p>
+
+  </form>
+</div>

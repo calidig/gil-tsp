@@ -1,0 +1,23 @@
+
+<div *ngIf="routeInfo" class="box_container">
+  <div class="row">
+    <div class="col-8">
+      <span class="label">Route:</span> <span class="fontbold"> {{routeName || mapViewService.selectedRouteInfo.name || mapViewService.state.name}}</span>
+    </div>
+    <div class="col-4">
+      <span class="label">Status </span> <app-chip *ngIf="mapViewService.selectedRouteInfo.status || mapViewService.state?.status" color="#15b11e">{{mapViewService.selectedRouteInfo.status || mapViewService.state?.status}}</app-chip>
+    </div>
+
+    <div class="col-12">
+      <span class="label">Estimated Time:</span> <span class="fontbold"> {{getTime(totalInfo?.eta)}}</span>
+    </div>
+
+    <div class="col-6">
+      <span class="label">Total Boxes:</span> <span class="fontbold"> {{totalInfo?.boxes}}</span>
+    </div>
+    <div class="col-6">
+      <span class="label">Estimated Distance:</span> <span class="fontbold"> {{getDistance(totalInfo?.distance)}}</span>
+    </div>
+  </div>
+
+</div>

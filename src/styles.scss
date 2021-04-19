@@ -1,0 +1,85 @@
+/* You can add global styles to this file, and also import other style files */
+//@import "css/bootstrap-grid";
+@import "css/vars";
+@import "css/classes";
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import "../node_modules/bootstrap-css-only/css/bootstrap-grid.css";
+@import "~@angular/cdk/overlay";
+@include cdk-overlay();
+
+html, body {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;
+  margin: 0;
+  color: $text-main;
+  font-size: 14px;
+  letter-spacing: .2px;
+}
+
+button {
+  cursor: pointer;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.remove-style {
+  all: unset;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 18px;
+  color: $title-color;
+  font-family: Roboto, -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Arial, sans-serif
+}
+
+a:visited, a:hover, a:active {
+  color: inherit;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.default-form-width {
+  width: 400px;
+  max-width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.hover-focus {
+  &:hover:not(:disabled) {
+    filter: brightness(.9);
+  }
+}
+
+.flex-button-end {
+  align-self: flex-end;
+  padding-top: 10px
+}
+
+.w-100 {
+  width: 100%;
+}
+
+app-form-checkbox, app-form-label {
+  display: inline-flex !important;
+}
+
+app-form-field label .checkbox-label {
+  padding-right: 10px !important;
+  padding-left: 10px !important;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.row, [class*="col-"] {
+  padding: 0 !important;
+  margin: 0 !important;
+}

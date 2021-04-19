@@ -1,0 +1,51 @@
+<div class="table-view" style="display: flex; flex-direction: column; padding-left: 20px; padding-right: 20px; padding-top: 50px;">
+  <app-preview-addresses-map [csvRecords]="!loading && data.csvRecords"></app-preview-addresses-map>
+
+  <table>
+    <thead>
+    <tr>
+      <th (click)="sort('_index')" class="pointer">#</th>
+      <th (click)="sort('address')" class="pointer">{{language.translationsDictionary.place}}</th>
+      <th (click)="sort('demand')" class="pointer">{{language.translationsDictionary.demand}}</th>
+      <th>{{language.translationsDictionary.phoneContact}}</th>
+      <th (click)="sort('timeInPoint')" class="pointer">{{language.translationsDictionary.timeInPoint}}</th>
+      <th (click)="sort('description')" class="pointer">{{language.translationsDictionary.description}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let row of data.csvRecords;let ind=index;" [class.invalid-address]="!loading && !row.geolocation" [class.region-address]="!loading && row.geolocation?.type === 'region'">
+<!--        <input type="checkbox" (change)="changeSelected($event,row,ind)">-->
+      <td>
+        <span>{{row._index}}</span>
+      </td>
+      <!--                        Place-->
+      <td>
+        <input [(ngModel)]="row.address" (change)="updateAddress(row)">
+      </td>
+
+      <!--                        demand          -->
+      <td>
+        <input [(ngModel)]="row.demand" type="number" style="width: 70px">
+      </td>
+
+      <!--                        phone contact       -->
+      <td>
+        <input [(ngModel)]="row.phone">
+      </td>
+
+      <!--                        time in point       -->
+      <td>
+        <input [(ngModel)]="row.timeInPoint" style="width: 70px">
+      </td>
+      <td>
+        <textarea [(ngModel)]="row.description"></textarea>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <app-action-button (click)="findRoute()" [disabled]="loading" color="primary"
+                     style="align-self: flex-start; padding-top: 20px">
+    {{language.translationsDictionary.findRoute}}
+  </app-action-button>
+</div>

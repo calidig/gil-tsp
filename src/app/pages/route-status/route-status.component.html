@@ -1,0 +1,59 @@
+<div class="table-view"
+     style="display: flex; margin-left: 20px; margin-right: 20px; flex-direction: column; align-items: center; min-width: 1000px">
+  <div style="align-self: flex-start;padding-top: 50px; padding-bottom: 20px">
+    <label>{{language.translationsDictionary.sortBy}}
+      <select (change)="sortBy($event.target)">
+        <option
+          value="createdAt">{{language.translationsDictionary.date}}</option>
+        <option
+          value="name">{{language.translationsDictionary.name}}</option>
+        <option
+          value="status">{{language.translationsDictionary.status}}</option>
+      </select>
+    </label>
+  </div>
+
+  <table>
+    <colgroup>
+      <col span="1" style="width: 25%;">
+      <col span="1" style="width: 50%;">
+      <col span="1" style="width: 15%;">
+      <col span="1" style="width: 10%;">
+    </colgroup>
+
+    <thead>
+    <tr>
+      <th>{{language.translationsDictionary.date}}</th>
+      <th>{{language.translationsDictionary.name}}</th>
+      <th>{{language.translationsDictionary.status}}</th>
+      <th>{{language.translationsDictionary.actions}}</th>
+    </tr>
+    </thead>
+    <tbody>
+
+
+    <tr *ngFor="let route of routes">
+      <td><span>{{getAsDate(route.createdAt) | date:'short'}}</span></td>
+      <td>
+        <span>{{route.name}}</span>
+      </td>
+      <td>
+        <app-chip [color]="getStatusColor(route.status)">{{route.status}}</app-chip>
+      </td>
+      <td class="action">
+        <div>
+          <button (click)="deleteRoute(route)"
+                  class="delete-button"
+                  [disabled]="route.status === 'canceled'">{{language.translationsDictionary.delete}}</button>
+        </div>
+        <ng-container *ngIf="route.status === 'completed'">
+          <span class="border"></span>
+          <div>
+            <a (click)="open(route)">{{language.translationsDictionary.view}}</a>
+          </div>
+        </ng-container>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

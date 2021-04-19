@@ -1,0 +1,92 @@
+<div class="w-100" style="display: flex; justify-content: center">
+
+  <form #form="ngForm" (submit)="onSubmit(form)" class="default-form-width">
+
+    <app-form-field style="display: none">
+      <label>
+        <input #f (change)="handleFileInput($event)"
+               name="file"
+               required
+               type="file"
+        >
+      </label>
+    </app-form-field>
+
+    <app-form-field>
+      <label>
+        <app-form-label>{{language.translationsDictionary.uploadFile}}*</app-form-label>
+        <input (click)="f.click()" readonly
+               [placeholder]="data?.file?.name || language.translationsDictionary.browseCSV" style="cursor: pointer">
+      </label>
+      <app-form-error
+        *ngIf="(!data?.csvRecords?.length && form.submitted)">{{language.translationsDictionary.formErrorRequired}}
+      </app-form-error>
+    </app-form-field>
+
+    <app-form-field>
+      <label style="text-transform: unset;">
+        <app-form-label>{{language.translationsDictionary.nameThisRouteSoYouCanFindIt}}</app-form-label>
+        <input #name="ngModel" [(ngModel)]="data.name" name="name">
+      </label>
+      <app-form-error
+        *ngIf="name.invalid  && (name.touched || form.submitted)">{{language.translationsDictionary.formErrorRequired}}
+      </app-form-error>
+    </app-form-field>
+
+    <app-form-field>
+      <label>
+        <app-form-label>{{language.translationsDictionary.startDate}}</app-form-label>
+        <input type="date" [(ngModel)]="startTime.date" name="startData">
+      </label>
+    </app-form-field>
+
+    <app-form-field>
+      <label>
+        <app-form-label>{{language.translationsDictionary.startTime}}</app-form-label>
+        <input type="time" [(ngModel)]="startTime.time" name="startTime">
+      </label>
+    </app-form-field>
+
+    <app-form-field>
+      <label>
+        <app-form-label>{{language.translationsDictionary.startLocation}}*</app-form-label>
+        <input #startPoint="ngModel" [(ngModel)]="data.startPoint" name="startPoint"
+               required>
+      </label>
+      <app-form-error  *ngIf="startPoint.invalid  && (startPoint.dirty || form.submitted)">
+        {{language.translationsDictionary.formErrorRequired}}
+      </app-form-error>
+    </app-form-field>
+
+    <app-form-field>
+      <label style="text-transform: unset;">
+        <app-form-checkbox [state]="rememberLocation"></app-form-checkbox>
+        <app-form-label class="checkbox-label">{{language.translationsDictionary.rememberLabel}}</app-form-label>
+        <input [(ngModel)]="rememberLocation" name="rememberLocation" type="checkbox">
+      </label>
+    </app-form-field>
+
+    <app-form-field>
+      <label>
+        <select [(ngModel)]="data.country" name="country" required #country="ngModel" >
+          <option *ngFor="let country of availableCountries" [value]="country.value">{{country.name}}</option>
+        </select>
+      </label>
+      <app-form-error  *ngIf="country.invalid  && (country.dirty || form.submitted)">
+        {{language.translationsDictionary.formErrorRequired}}
+      </app-form-error>
+    </app-form-field>
+
+    <span class="py-15">Settings</span>
+
+    <app-form-field *ngFor="let flag of flags">
+      <label style="text-transform: unset;">
+        <app-form-checkbox [state]="data.flags[flag.name]"></app-form-checkbox>
+        <app-form-label class="checkbox-label">{{flag.value}}</app-form-label>
+        <input [(ngModel)]="data.flags[flag.name]" [name]="flag.name" type="checkbox">
+      </label>
+    </app-form-field>
+    <app-action-button class="flex-button-end"
+                       color="primary">{{language.translationsDictionary.next}}</app-action-button>
+  </form>
+</div>

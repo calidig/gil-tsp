@@ -1,0 +1,66 @@
+<div class="table-view all-driver" style="display: flex; flex-direction: column; padding-left: 20px; padding-right: 20px; padding-top: 50px;">
+  <h2>My Team Location Real Time (Today Time - {{todayTime}})</h2>
+  <div class="w-100" style="height: 300px">
+    <google-map
+      #googleMap
+      [zoom]="6"
+      width="100%"
+      height="100%"
+    >
+    </google-map>
+  </div>
+<div class="mt-2">
+<table class="table table-bordered">
+  <thead>
+  <tr class="bk-blue">
+    <th></th>
+    <th>Drivers</th>
+    <th>Total Address to deliver</th>
+    <th>Total Boxes</th>
+    <th>Finished %</th>
+    <th>Delivered %</th>
+    <th>Postponed %</th>
+    <th>Left to Delivered %</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <td>Total</td>
+    <td>{{routes?.length}}</td>
+    <td>{{routes?.totalAddress}}</td>
+    <td>{{routes?.totalBoxes}}</td>
+    <td>{{routes?.finishedPer}}%</td>
+    <td class="bk-green">{{routes?.deliverPer}}%</td>
+    <td class="bk-red">{{routes?.postponed}}%</td>
+    <td>{{routes?.leftToDeliver}}%</td>
+  </tr>
+  </tbody>
+</table>
+</div>
+<div class="mt-2">
+<table class="table table-bordered">
+  <thead>
+  <tr class="bk-blue">
+    <th>Driver</th>
+    <th>Total Address to deliver</th>
+    <th>Total Boxes</th>
+    <th>Finished %</th>
+    <th >Delivered</th>
+    <th >Postponed</th>
+    <th>Left to Delivered</th>
+    <th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let row of routes;let ind=index;" >
+    <td><a href="/new-route/map/{{row?.id}}">{{row?.user.firstName}} {{row?.user.lastName}}</a></td>
+    <td>{{row?.totaldeliveryindex}}</td>
+    <td>{{row?.totalBoxes}}</td>
+    <td>{{row?.finishedPer}}%</td>
+    <td class="bk-green">{{row?.deliverPer}}%</td>
+    <td class="bk-red">{{row?.postponed}}%</td>
+    <td>{{row?.leftToDeliver}}%</td>
+  </tr>
+  </tbody>
+</table>
+</div>
+</div>

@@ -1,0 +1,70 @@
+<div class="" style="position: relative;">
+
+  <div *ngFor="let route of data;let ind=index;" class="view stop {{ind == this.nextPointIndex && mapViewService.getStatus() == 'active' && 'active' || ''}}">
+    <span
+      class="eta_time {{ind == this.nextPointIndex && mapViewService.getStatus() === 'active' && 'eta_time_active' || 'eta_time_next'}}">{{asDate(route.eta) | date:'h:mm' }}</span>
+    <div>
+
+      <div class="title_text">{{ind+1}}. {{route.address}}</div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="text">
+            <span class="label">{{language.translationsDictionary.eta}}</span>: {{asDate(route.eta) | date:'short'}}
+          </div>
+          <div class="text" *ngIf="route.phone">
+            <span class="label">{{language.translationsDictionary.phoneContact}}</span>:
+            <a [href]="'tel:' + route.phone">{{route.phone}}</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6 text"><span *ngIf="route.boxes" class="label">{{language.translationsDictionary.demand}}<span>: {{route.boxes}}</span></span></div>
+      </div>
+      <div class="row ">
+        <div class="col-6">
+        <app-form-field>
+          <label>
+            <app-form-label>Comment</app-form-label>
+            <textarea [disabled]="auth.isManager()" (change)="updateComment(route)" [(ngModel)]="route.comment">
+            </textarea>
+          </label>
+        </app-form-field>
+        </div>
+        <div class="col-6 justify-content-end"
+             *ngIf="mapViewService.getStatus() && (ind == this.nextPointIndex && auth.isDriver()) || route.status">
+          <div class="actions" *ngIf="showStatus || true">
+            <app-form-field>
+              <label>
+                <select style="max-width: 10em; border: unset;background-color: inherit" (change)="updateStatus($event, route)" [value]="route.status || ''"
+                        [disabled]="!!route.status || !auth.isDriver()">
+                  <option value="" selected disabled>Status</option>
+                  <option value="delivered">delivered</option>
+                  <option value="postponed">postponed</option>
+                </select>
+              </label>
+            </app-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="action"></div>
+        </div>
+        <div class="col-6"><a [href]="openInGoogleUrl(ind)" target="_blank"><img src="assets/icons/direction.svg" alt=""
+                                                                                 class="svg_icon"/> {{language.translationsDictionary.direction}}</a></div>
+        <div class="col-6">
+          <div [appTooltip]="route.description" style="display: inline-block"><img src="assets/icons/info.svg" alt="" class="svg_icon"/> More Info</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <a [href]="'tel:' + route.phone"></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+

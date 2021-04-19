@@ -1,0 +1,32 @@
+h2 {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin: 0;
+  padding-top: 15px;
+}
+.float-start{
+  position: fixed;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+.float-start .btn {
+  background: #007bff;
+  text-align: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.float-start .btn:hover {
+  background: #0069D9;
+}

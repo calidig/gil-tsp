@@ -1,0 +1,46 @@
+.danger {
+  color: #FFFFFF;
+  background-color: #f44336;
+}
+
+.success {
+  color: #FFFFFF;
+  background-color: #4caf50;
+}
+
+.primary {
+  color: #FFFFFF;
+  background-color: #2196f3;
+}
+
+.info {
+  background-color: #00bcd4;
+}
+
+.warning {
+  background-color: #ffeb3b;
+}
+
+.dark {
+  color: #FFFFFF;
+  background-color: #313435;
+}
+
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 6px 12px;
+  font-size: 16px;
+  line-height: 1.5;
+  border-radius: .25rem;
+
+  &:disabled {
+    opacity: .7;
+    cursor: unset;
+  }
+}

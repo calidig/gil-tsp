@@ -1,0 +1,113 @@
+<div class="table-view"
+     style="padding-left: 20px; padding-right: 20px; padding-top: 50px;">
+  <table>
+    <thead>
+    <tr>
+      <th>email</th>
+      <th>first_name</th>
+      <th>last_name</th>
+      <th>car_size</th>
+      <th>home</th>
+      <th>max_distance</th>
+      <th>max_time</th>
+      <th>phone</th>
+      <th>organization</th>
+      <th>branch</th>
+      <th>role</th>
+      <th>createdAt</th>
+      <th>updatedAt</th>
+      <th>actions</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <!--    new user  -->
+    <tr>
+      <td><input [(ngModel)]="newUser.email"></td>
+      <td><input [(ngModel)]="newUser.firstName"></td>
+      <td><input [(ngModel)]="newUser.lastName"></td>
+      <td>
+        <select [ngModel]="newUser.car_size" name="car_size">
+          <option [value]="null"> -- select an option -- </option>
+          <option *ngFor="let option of carTypeOptions" [value]="option.value">{{option.name}}</option>
+        </select>
+      </td>
+      <td><input [(ngModel)]="newUser.home"></td>
+      <td><input [(ngModel)]="newUser.max_distance" type="number" min="0"></td>
+      <td><input [(ngModel)]="newUser.max_time" type="number" min="0"></td>
+      <td><input [(ngModel)]="newUser.phone"></td>
+      <td>
+        <select [(ngModel)]="newUser.organization" [value]="newUser.organization">
+          <option *ngFor="let option of organizationsWithBranches" [value]="option.id">{{option.name}}</option>
+        </select>
+      </td>
+      <td>
+        <select [(ngModel)]="newUser.branch" [value]="newUser.branch">
+          <option [value]="null"> -- select an option -- </option>
+          <option *ngFor="let option of getBranches(newUser)" [value]="option.id">{{option.name}}</option>
+        </select>
+      </td>
+      <td>
+        <select [(ngModel)]="newUser.type" [value]="newUser.type">
+          <option [value]="null"> -- select an option -- </option>
+          <option *ngFor="let option of roles" [value]="option">{{option}}</option>
+        </select>
+      </td>
+      <td></td>
+      <td></td>
+
+      <td class="action">
+        <div>
+          <button (click)="createUser()">new</button>
+        </div>
+      </td>
+    </tr>
+
+    <tr *ngFor="let user of users">
+      <td><input [value]="user.email" (blur)="updateUser(user, $event, 'email')"></td>
+      <td><input [value]="user.firstName" (blur)="updateUser(user, $event, 'firstName')"></td>
+      <td><input [value]="user.lastName" (blur)="updateUser(user, $event, 'lastName')"></td>
+      <td>
+        <select [ngModel]="user.car_size" [value]="user.car_size" (blur)="updateUser(user, $event, 'car_size')">
+          <option [value]="null"> -- select an option -- </option>
+          <option *ngFor="let option of carTypeOptions" [value]="option.name">{{option.name}}</option>
+        </select>
+      </td>
+
+
+      <td><input [value]="user.home" (blur)="updateUser(user, $event, 'home')"></td>
+      <td><input [value]="user.max_distance" (blur)="updateUser(user, $event, 'max_distance')"></td>
+      <td><input [value]="user.max_time" (blur)="updateUser(user, $event, 'max_time')"></td>
+      <td><input [value]="user.phone" (blur)="updateUser(user, $event, 'phone')"></td>
+      <td>
+        <select [value]="user.organization" (blur)="updateUser(user, $event, 'organization')">
+          <option [value]="null"> -- select an option -- </option>
+          <option *ngFor="let option of organizationsWithBranches" [value]="option.id"
+                  [selected]="option.id === user.organization">{{option.name}}</option>
+        </select>
+      </td>
+      <td>
+        <select [value]="user.branch" (blur)="updateUser(user, $event, 'branch')">
+          <option [value]="null"  > -- select an option -- </option>
+          <option *ngFor="let option of getBranches(user)" [value]="option.id"
+                  [selected]="user.branch === option.id">{{option.name}}</option>
+        </select>
+      </td>
+      <td>
+        <select [value]="user.type" (blur)="updateUser(user, $event, 'type')">
+          <option [value]="null"> -- select an option -- </option>
+          <option *ngFor="let option of roles" [value]="option" [selected]="user.type === option">{{option}}</option>
+        </select>
+      </td>
+      <td><input readonly [value]="user.createdAt" (blur)="updateUser(user, $event, 'createdAt')"></td>
+      <td><input readonly [value]="user.updatedAt" (blur)="updateUser(user, $event, 'updatedAt')"></td>
+
+      <td class="action">
+        <div>
+          <button (click)="delete(user)" style="color: red">delete</button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

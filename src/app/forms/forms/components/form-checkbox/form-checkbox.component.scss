@@ -1,0 +1,20 @@
+div {
+  cursor: pointer;
+}
+
+span {
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  border: 1px solid #e6eaf0;
+  box-sizing: border-box;
+  transform: translateY(.2rem);
+}
+
+app-icon {
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+}
+

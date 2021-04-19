@@ -1,0 +1,71 @@
+<div id="side-menu-content">
+  <app-navigation-header>
+    <!--        <span>{{language.translationsDictionary.menu}}</span>-->
+    <!--      *ngIf="cfg.isOpened">{{language.translationsDictionary.CoreAI}}</h5></div>-->
+    <div class="w-100" style="display: flex; justify-content: center"><h5
+      *ngIf="cfg.isOpened">{{auth?.authData?.role || language.translationsDictionary.CoreAI}}</h5></div>
+
+  </app-navigation-header>
+  <ul style="flex-grow: 1; display: flex; flex-direction: column; overflow: hidden">
+    <li>
+      <ul style="height: 100%"></ul>
+    </li>
+    <li (click)="selectedIndex=i" *ngFor="let p of navigation.sideMenuItems$ | async; let i = index">
+      <a [routerLink]="[p.url]">
+        <app-icon [fill]="p.color" [icon]="p.icon" class="icon-holder"></app-icon>
+        <span>{{ p.title }}</span></a>
+    </li>
+
+    <li>
+      <button class="remove-style side-menu-item" (click)="showLanguageOptions = !showLanguageOptions">
+        <app-icon fill="#e91e63" icon="language" class="icon-holder"></app-icon>
+        <span>{{language.translationsDictionary.language}}</span>
+      </button>
+    </li>
+
+    <li style="height: auto">
+      <ul
+        style="overflow: hidden; padding: 0"
+        [@openClose]="{value: showLanguageOptions ? 'open' : 'closed', params: { items: languages.length * 40 }}"
+      >
+        <li *ngFor="let l of languages" style="height: 35px">
+          <app-icon class="icon-holder"></app-icon>
+          <label class="side-menu-item" [style.font-weight]="l===selectedLanguage?'600':'normal'"
+          ><input [(ngModel)]="selectedLanguage" type="radio" name="language" [value]="l"
+                  (change)="language.setLanguage(l)"
+                  class="m-0"
+          ><span style="padding: 0 10px; display: inline-block">{{language.languagesConfigs[l].name}}</span></label>
+        </li>
+      </ul>
+    </li>
+
+    <li *ngIf="cfg.isOpened && cfg.screenSize.isSmall">
+      <button class="remove-style side-menu-item" (click)="cfg.toggleMenu()">
+        <app-icon fill="#0a9c0a" icon="exit" class="icon-holder"></app-icon>
+        <span>{{language.translationsDictionary.closeMenu}}</span>
+      </button>
+    </li>
+
+    <li *ngIf="auth.isAuthenticated()">
+      <button class="remove-style side-menu-item" (click)="auth.logout()">
+        <app-icon fill="black" icon="logout" class="icon-holder"></app-icon>
+        <span>{{language.translationsDictionary.logout}}</span>
+      </button>
+    </li>
+    <li style="height: 0; overflow: hidden; flex-grow: 1; flex-direction: column">
+      <ul style="height: 100%"></ul>
+    </li>
+    <li class="version" *ngIf="!apiFail else showError">
+      <app-icon class="icon-holder" icon="info" fill="#03a9f4"></app-icon>
+      <span class="w-100">v{{version}}</span>
+    </li>
+
+    <ng-template #showError>
+      <li id="version" style="background-color: #ffd6d6">
+        <app-icon class="icon-holder" icon="info" fill="red"></app-icon>
+        <span class="w-100">Server not available</span>
+      </li>
+    </ng-template>
+  </ul>
+</div>
+

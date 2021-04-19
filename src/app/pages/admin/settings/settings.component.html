@@ -1,0 +1,40 @@
+<div class="table-view" style="padding-left: 20px; padding-right: 20px; padding-top: 50px;">
+  <table>
+    <thead>
+    <tr>
+      <th>name</th>
+      <th>type</th>
+      <th>value</th>
+      <th>action</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <!--    new setting  -->
+    <tr>
+      <!--                        Place-->
+      <td><input [(ngModel)]="newSetting.name"></td>
+      <td><input [(ngModel)]="newSetting.type"></td>
+      <td><input [(ngModel)]="newSetting.value"></td>
+      <td class="action">
+        <div>
+          <button (click)="createSetting()">new</button>
+        </div>
+      </td>
+    </tr>
+
+
+    <tr *ngFor="let setting of settings">
+      <!--                        Place-->
+      <td><input [value]="setting.name" (blur)="update(setting, $event, 'name')"></td>
+      <td><input [value]="setting.type" (blur)="update(setting, $event, 'type')"></td>
+      <td><input [value]="setting.value" (blur)="update(setting, $event, 'value')"></td>
+      <td class="action">
+        <div>
+          <button (click)="delete(setting)" style="color: red">delete</button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

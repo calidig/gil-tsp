@@ -1,0 +1,35 @@
+.nav_tab_container {
+  padding: 0;
+  // background-color: #f0f0f0;
+  background-color: #ffffff;
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.4);
+  margin-bottom: 6px;
+}
+
+.nav_tab_container label {
+  color: #222222;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.nav_tab_container .flex .flex-item {
+  padding-top: 4px;
+  border-right: 1px solid #dcdcdc;
+}
+
+.svg_icon {
+  width: 20px;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-item {
+  flex: 1;
+}
+
+.center {
+  text-align: center;
+}

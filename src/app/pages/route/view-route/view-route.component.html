@@ -1,0 +1,31 @@
+<app-route-tab></app-route-tab>
+
+<div style="margin-bottom: 15px" *ngIf="!configService.areTabsDisplayed()">
+  <google-map
+    #googleMap
+    [center]="mapViewService.center"
+    [zoom]="6"
+    width="100%">
+  </google-map>
+</div>
+
+<div class="container">
+  <div *ngFor="let infoTablePreview of mapViewService.infoTablesPreview;let ind = index">
+    <h2 *ngIf="auth.isManager()" class="px-15 py-3">{{language.translationsDictionary.driver}}
+      : {{infoTablePreview.driver}}
+    </h2>
+    <div class="row">
+      <div class="col-12">
+        <app-route-details [routeName]="mapViewService.state.data[ind].name" [info]="infoTablePreview.info"></app-route-details>
+      </div>
+    </div>
+    <app-route-info class="w-100" [data]="infoTablePreview.info" disableSelect></app-route-info>
+  </div>
+  <div class="float-start">
+    <button class="px-15 btn" *ngIf="auth.isDriver() && mapViewService.state?.status == 'inactive'" (click)="this.startRoute()" [disabled]="startingRoute">
+      Start
+    </button>
+  </div>
+
+</div>
+

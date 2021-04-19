@@ -1,0 +1,11 @@
+@import "src/css/vars";
+
+.delete-button {
+  &:disabled {
+    color: $text-main !important;
+  }
+
+  &:not(:disabled) {
+    color: red;
+  }
+}

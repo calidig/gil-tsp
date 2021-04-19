@@ -1,0 +1,31 @@
+$danger-color: #ffdcdc;
+
+.invalid-address {
+  background-color: $danger-color;
+
+  input {
+    background-color: $danger-color;
+  }
+
+  textarea {
+    background-color: $danger-color;
+  }
+}
+
+$warn-color: #fff1dc;
+
+.region-address {
+  background-color: $warn-color;
+
+  input {
+    background-color: $warn-color;
+  }
+
+  textarea {
+    background-color: $warn-color;
+  }
+}
+
+.driver-dropdown {
+  padding: 20px;
+}

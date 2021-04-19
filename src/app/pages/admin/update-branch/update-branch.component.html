@@ -1,0 +1,50 @@
+<div class="table-view" style="padding-left: 20px; padding-right: 20px; padding-top: 50px;">
+  <table>
+    <thead>
+    <tr>
+      <th>name</th>
+      <th>organization</th>
+      <th>createdAt</th>
+      <th>updatedAt</th>
+      <th>action</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr>
+      <td><input [(ngModel)]="newBranch.name"></td>
+      <td>
+        <select [(ngModel)]="newBranch.organization" [value]="newBranch.organization">
+          <option *ngFor="let option of organizations" [value]="option.id">{{option.name}}</option>
+        </select>
+      </td>
+      <td></td>
+      <td></td>
+      <td class="action">
+        <div>
+          <button (click)="createOrganization()">new</button>
+        </div>
+      </td>
+    </tr>
+
+    <tr *ngFor="let branch of branches">
+      <td><input [value]="branch.name" (blur)="update(branch, $event, 'name')"></td>
+      <td>
+        <select [value]="branch.organization" (blur)="update(branch, $event, 'organization')">
+          <option [value]="null"> -- select an option -- </option>
+          <option *ngFor="let option of organizations" [value]="option.id"
+                  [selected]="option.id === branch.organization">{{option.name}}</option>
+        </select>
+      </td>
+
+      <td><input [value]="branch.createdAt" readonly></td>
+      <td><input [value]="branch.updatedAt" readonly></td>
+      <td class="action">
+        <div>
+          <button (click)="delete(branch)" style="color: red">delete</button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

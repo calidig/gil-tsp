@@ -1,0 +1,19 @@
+<div class="nav_tab_container" *ngIf="this.configService.areTabsDisplayed()">
+  <div class="flex">
+    <div class="flex-item center pointer" (click)="gotoMyRoutes()">
+      <app-menu-button style="display: flex; justify-content: center; transform: translateY(50%);"></app-menu-button>
+    </div>
+    <div class="flex-item center pointer" (click)="gotoMyRoutes()">
+      <img src="assets/icons/route.svg" alt="rout" class="svg_icon"/><br>
+      <label>ROUTES</label>
+    </div>
+    <div class="flex-item center pointer" (click)="gotoRoute('map')">
+      <img src="assets/icons/map.svg" alt="" class="svg_icon"/><br>
+      <label>MAP</label>
+    </div>
+    <div class="flex-item center pointer" (click)="gotoRoute('stops')">
+      <img src="assets/icons/list.svg" alt="" class="svg_icon"/><br>
+      <label>STOP LIST</label>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div style="display: flex; justify-content: center">
+  <form (submit)="login()" [formGroup]="loginForm" class="default-form-width">
+    <h2 style="text-transform: capitalize">
+      <strong>{{language.translationsDictionary.login}}</strong>
+    </h2>
+    <app-form-field>
+      <label>
+        <app-form-label>{{language.translationsDictionary.email}}</app-form-label>
+        <input autocomplete="email" formControlName="email" name="email"
+               required type="email">
+      </label>
+    </app-form-field>
+
+    <app-form-field>
+      <label>
+        <app-form-label>{{language.translationsDictionary.password}}</app-form-label>
+        <input autocomplete="current-password" formControlName="password" name="password"
+               required type="password">
+      </label>
+    </app-form-field>
+
+    <app-action-button [disabled]="loginForm.invalid" class="flex-button-end"
+                       color="primary">{{language.translationsDictionary.login}}</app-action-button>
+
+    <p>{{language.translationsDictionary.dontHaveAnAccount}}
+      <a routerLink="/auth/register">{{language.translationsDictionary.register}}</a></p>
+  </form>
+</div>

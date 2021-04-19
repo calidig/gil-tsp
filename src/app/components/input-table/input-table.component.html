@@ -1,0 +1,47 @@
+<div class="table-view">
+  <table *ngIf="_data">
+    <thead>
+    <tr>
+      <th *ngFor="let header of _data.headers" (click)="header.onClick && header.onClick(_data, header.index)"
+          [style.cursor]="header.onClick?'pointer':''">{{header.name}}</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <!--        <tr>-->
+    <!--          <td><input [(ngModel)]="newSetting.name"></td>-->
+    <!--          <td><input [(ngModel)]="newSetting.type"></td>-->
+    <!--          <td><input [(ngModel)]="newSetting.value"></td>-->
+    <!--          <td class="action">-->
+    <!--            <div>-->
+    <!--              <button (click)="createSetting()">new</button>-->
+    <!--            </div>-->
+    <!--          </td>-->
+    <!--        </tr>-->
+
+
+    <tr *ngFor="let entity of _data.entities;let entityIndex = index">
+      <ng-container *ngFor="let header of _data.headers;">
+        <ng-template [ngIf]="header.fields.type === 'input'">
+          <td>
+            <label>
+              <input [type]="header.fields.inputType" [value]="entity[header.index]" (blur)="header.fields.onBlur(entity, header.index, $event)" (change)="header.fields.onChange(entity, header.index, $event)">
+            </label>
+          </td>
+        </ng-template>
+
+        <ng-template [ngIf]="header.fields.type === 'actions'">
+          <td class="action">
+            <div *ngFor="let action of entity[header.index];let i = index;">
+              <button *ngIf="action.type==='button'" (click)="action.do(_data.entities, entityIndex, header.index)"
+                      [style.color]="action.color">{{action.name}}</button>
+              <!--              <span *ngIf="i < entity[header.index].actions.length - 1">|</span>-->
+            </div>
+          </td>
+        </ng-template>
+      </ng-container>
+
+    </tr>
+    </tbody>
+  </table>
+</div>

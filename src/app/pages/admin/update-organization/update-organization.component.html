@@ -1,0 +1,43 @@
+<div class="table-view" style="padding-left: 20px; padding-right: 20px; padding-top: 50px;">
+  <table>
+    <thead>
+    <tr>
+      <th>name</th>
+      <th>address</th>
+      <th>createdAt</th>
+      <th>updatedAt</th>
+      <th>action</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <!--    new organization  -->
+    <tr>
+      <!--                        Place-->
+      <td><input [(ngModel)]="newOrganization.name"></td>
+      <td><input [(ngModel)]="newOrganization.address"></td>
+      <td></td>
+      <td></td>
+      <td class="action">
+        <div>
+          <button (click)="createOrganization()">new</button>
+        </div>
+      </td>
+    </tr>
+
+
+    <tr *ngFor="let organization of organizations">
+      <!--                        Place-->
+      <td><input [value]="organization.name" (blur)="update(organization, $event, 'name')"></td>
+      <td><input [value]="organization.address" (blur)="update(organization, $event, 'address')"></td>
+      <td><input [value]="organization.createdAt" readonly></td>
+      <td><input [value]="organization.updatedAt" readonly></td>
+      <td class="action">
+        <div>
+          <button (click)="delete(organization)" style="color: red">delete</button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

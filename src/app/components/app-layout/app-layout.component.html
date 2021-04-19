@@ -1,0 +1,23 @@
+<div style="width: 100%; height: 100%; display: flex; min-height: 100vh; min-width: 100vw">
+  <div [style.width.px]="cfg.sideMenuWidth$ | async" style="position: fixed; z-index: 10; max-width: 100vw"
+       class="side-menu-border-right">
+    <app-side-menu></app-side-menu>
+  </div>
+
+  <div *ngIf="!cfg.screenSize.isSmall" [style.min-width.px]="cfg.sideMenuWidth$ | async" id="wrapper"></div>
+
+  <div class="w-100" style="display: flex; flex-direction: column;">
+    <div style="height: 100%">
+      <app-navigation-header *ngIf="!cfg.screenSize.isSmall || auth.isManager()">
+        <div style="display: flex; justify-content: space-between" class="w-100">
+          <div style="padding-right: 15px; padding-left: 15px;">
+            <app-menu-button></app-menu-button>
+          </div>
+        </div>
+      </app-navigation-header>
+      <!--CONTENT-->
+      <ng-content></ng-content>
+    </div>
+    <!--FOOTER-->
+  </div>
+</div>

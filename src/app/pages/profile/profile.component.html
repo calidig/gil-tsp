@@ -1,0 +1,89 @@
+<div class="w-100" style="display: flex; justify-content: center">
+  <form #formElement="ngForm" (submit)="onSubmit(formElement.value)" class="default-form-width">
+    <div style="text-align: start">
+      <h2>Profile</h2>
+    </div>
+
+    <app-form-field>
+      <label>
+        <app-form-label>{{language.translationsDictionary.firstName}}</app-form-label>
+
+        <input [ngModel]="profile.firstName" name="firstName">
+      </label>
+    </app-form-field>
+
+    <app-form-field>
+      <label>
+        <app-form-label>{{language.translationsDictionary.lastName}}</app-form-label>
+
+        <input [ngModel]="profile.lastName" name="lastName">
+      </label>
+    </app-form-field>
+
+    <app-form-field style="display: none">
+      <label>
+        <app-form-label>{{language.translationsDictionary.username}}</app-form-label>
+
+        <input [ngModel]="profile.email" name="username" readonly>
+      </label>
+    </app-form-field>
+
+    <app-form-field>
+      <label>
+        <app-form-label>{{language.translationsDictionary.carSizeLabel}}</app-form-label>
+
+        <select [ngModel]="profile.car_size" name="car_size">
+          <option value="small">{{language.translationsDictionary.small}}</option>
+          <option value="medium">{{language.translationsDictionary.medium}}</option>
+          <option value="large">{{language.translationsDictionary.large}}</option>
+        </select>
+      </label>
+    </app-form-field>
+
+    <div style="margin-top: 50px">
+      <h2>Contact Info</h2>
+    </div>
+
+    <app-form-field>
+      <label>
+        <app-form-label>{{language.translationsDictionary.email}}</app-form-label>
+
+        <input [ngModel]="profile.email" name="email" readonly type="email">
+      </label>
+    </app-form-field>
+
+    <app-form-field>
+      <label>
+        <app-form-label>{{language.translationsDictionary.phoneContact}}</app-form-label>
+        <input [ngModel]="profile.phone" autocomplete="tel" name="phone">
+      </label>
+      <!--                        TODO: input-->
+    </app-form-field>
+
+    <app-form-field>
+      <label>
+        <app-form-label>{{language.translationsDictionary.homeAddressLabel}}</app-form-label>
+
+        <textarea [ngModel]="profile.home" name="home"></textarea>
+      </label>
+    </app-form-field>
+
+    <app-form-field>
+      <label>
+        <app-form-label>{{language.translationsDictionary.max_distance}}</app-form-label>
+        <input [ngModel]="profile.max_distance" name="max_distance" min="0">
+      </label>
+    </app-form-field>
+    <app-form-field>
+      <label>
+        <app-form-label>{{language.translationsDictionary.max_time}}</app-form-label>
+        <input [ngModel]="profile.max_time" name="max_time" min="0">
+      </label>
+    </app-form-field>
+
+    <app-action-button class="flex-button-end"
+                       color="primary">{{language.translationsDictionary.submit}}</app-action-button>
+  </form>
+</div>
+
+

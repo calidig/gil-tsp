@@ -1,0 +1,123 @@
+<div class="w-100" style="display: flex; justify-content: center">
+
+  <form #form="ngForm" (submit)="onSubmit(form)" class="default-form-width">
+
+    <app-form-field style="display: none">
+      <label>
+        <input #f (change)="handleFileInput($event)"
+               name="file"
+               required
+               type="file"
+        >
+      </label>
+    </app-form-field>
+
+    <app-form-field>
+      <label>
+        <app-form-label>{{language.translationsDictionary.uploadFile}}*</app-form-label>
+        <input (click)="f.click()" readonly
+               [placeholder]="data?.file?.name || language.translationsDictionary.browseCSV" style="cursor: pointer">
+      </label>
+      <app-form-error
+        *ngIf="(!data?.csvRec?.length && form.submitted)">{{language.translationsDictionary.formErrorRequired}}
+      </app-form-error>
+    </app-form-field>
+
+    <app-form-field>
+      <label>
+        <app-form-label>{{language.translationsDictionary.startLocation}}*</app-form-label>
+        <input #startPoint="ngModel" [(ngModel)]="data.startPoint" name="startPoint"
+               required>
+      </label>
+      <app-form-error *ngIf="startPoint.invalid  && (startPoint.dirty || form.submitted)">
+        {{language.translationsDictionary.formErrorRequired}}
+      </app-form-error>
+    </app-form-field>
+
+    <app-form-field>
+      <label>
+        <app-form-label>Time limit for algorithm(s)*</app-form-label>
+        <input #algoTimeLimit="ngModel" [(ngModel)]="data.algoTimeLimit" name="algoTimeLimit"
+               required>
+      </label>
+      <app-form-error *ngIf="algoTimeLimit.invalid  && (algoTimeLimit.dirty || form.submitted)">
+        {{language.translationsDictionary.formErrorRequired}}
+      </app-form-error>
+    </app-form-field>
+
+    <app-form-field>
+      <label>
+        <app-form-label>Demand for points*</app-form-label>
+        <input #pointsDemand="ngModel" type="number" [(ngModel)]="data.pointsDemand" name="pointsDemand"
+               required>
+      </label>
+      <app-form-error *ngIf="pointsDemand.invalid  && (pointsDemand.dirty || form.submitted)">
+        {{language.translationsDictionary.formErrorRequired}}
+      </app-form-error>
+    </app-form-field>
+
+    <app-form-field>
+      <label>
+        <app-form-label>Time in points*</app-form-label>
+        <input #timeInPoint="ngModel" type="number" [(ngModel)]="data.timeInPoint" name="timeInPoint"
+               required>
+      </label>
+      <app-form-error *ngIf="timeInPoint.invalid  && (timeInPoint.dirty || form.submitted)">
+        {{language.translationsDictionary.formErrorRequired}}
+      </app-form-error>
+    </app-form-field>
+
+    <app-form-field *ngIf="data.flags['demand_flag']">
+      <label>
+        <app-form-label>Cars capacities*</app-form-label>
+        <input #carsCapacities="ngModel" type="number" [(ngModel)]="data.carsCapacities" name="carsCapacities"
+               required>
+      </label>
+      <app-form-error *ngIf="carsCapacities.invalid  && (carsCapacities.dirty || form.submitted)">
+        {{language.translationsDictionary.formErrorRequired}}
+      </app-form-error>
+    </app-form-field>
+
+    <app-form-field *ngIf="data.flags['time_flag']">
+      <label>
+        <app-form-label>Driver maximum time allowed to drive(h)*</app-form-label>
+        <input #carsTimeLimit="ngModel" type="number" [(ngModel)]="data.carsTimeLimit" name="carsTimeLimit"
+               required>
+      </label>
+      <app-form-error *ngIf="carsTimeLimit.invalid  && (carsTimeLimit.dirty || form.submitted)">
+        {{language.translationsDictionary.formErrorRequired}}
+      </app-form-error>
+    </app-form-field>
+
+    <app-form-field>
+      <label>
+        <app-form-label>Number of cars</app-form-label>
+        <input type="number" [(ngModel)]="data.numberOfCars" name="numberOfCars">
+      </label>
+    </app-form-field>
+
+    <app-form-field>
+      <label>
+        <app-form-label>Region*</app-form-label>
+        <select [(ngModel)]="data.country" name="country" required #country="ngModel">
+          <option *ngFor="let country of availableCountries" [value]="country.value">{{country.name}}</option>
+        </select>
+      </label>
+      <app-form-error *ngIf="country.invalid  && (country.dirty || form.submitted)">
+        {{language.translationsDictionary.formErrorRequired}}
+      </app-form-error>
+    </app-form-field>
+
+    <span class="py-15">Settings</span>
+
+    <app-form-field *ngFor="let flag of flags">
+      <label style="text-transform: unset;">
+        <app-form-checkbox [state]="data.flags[flag.name]"></app-form-checkbox>
+        <app-form-label class="checkbox-label">{{flag.value}}</app-form-label>
+        <input [(ngModel)]="data.flags[flag.name]" [name]="flag.name" type="checkbox">
+      </label>
+    </app-form-field>
+    <app-action-button class="flex-button-end" [disabled]="loading"
+                       color="primary">{{language.translationsDictionary.next}}</app-action-button>
+  </form>
+</div>
